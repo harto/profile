@@ -1,0 +1,13 @@
+[user]
+	name = Stuart Campbell
+	email = stuart@harto.org
+[color]
+	ui = auto
+[alias]
+    graph = log --pretty=graphable --graph --date=short
+    summary = log --oneline master..
+    preview = diff --cached
+    # XXX: need to specify branch
+    #unpush = push -f origin HEAD^:master
+[pretty]
+    graphable = %C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an %C(bold black)%cr
