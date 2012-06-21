@@ -11,3 +11,6 @@
     #unpush = push -f origin HEAD^:master
 [pretty]
     graphable = %C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an %C(bold black)%cr
+[push]
+	# only push current branch
+	default = upstream
