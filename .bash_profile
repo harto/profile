@@ -43,4 +43,6 @@ export MANPAGER="less -X"
 export EDITOR=emacs
 
 # Include any environment-specific settings
-source ~/.extras
+if [[ -r ~/.extras ]]; then
+    source ~/.extras
+fi
