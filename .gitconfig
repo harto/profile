@@ -5,6 +5,7 @@
 	ui = auto
 [alias]
     ci = commit -v
+    st = status
     graph = log --pretty=graphable --graph --date=short
     summary = log --oneline master..
     preview = diff --cached
