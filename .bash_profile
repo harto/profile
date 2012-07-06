@@ -34,6 +34,10 @@ alias servedir="python -m SimpleHTTPServer 1234"
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+# OS X
+if [ -d /usr/local/etc/bash_completion.d ]; then
+    . /usr/local/etc/bash_completion.d/*
+fi
 
 # make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
