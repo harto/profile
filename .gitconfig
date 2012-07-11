@@ -8,7 +8,8 @@
     co = checkout
     st = status
     graph = log --pretty=graphable --graph --date=short
-    summary = log --oneline master..
+    # XXX: should compare against branch point
+    summary = log --oneline origin/master..
     preview = diff --cached
     # XXX: need to specify branch
     #unpush = push -f origin HEAD^:master
