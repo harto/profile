@@ -11,8 +11,6 @@
     # XXX: should compare against branch point
     summary = log --oneline origin/master..
     preview = diff --cached
-    # XXX: need to specify branch
-    #unpush = push -f origin HEAD^:master
 [pretty]
     graphable = %C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an %C(bold black)%cr
 [push]
