@@ -16,3 +16,5 @@
 [push]
     # only push current branch
     default = upstream
+[core]
+	excludesfile = /Users/stuart/.gitignore-global
