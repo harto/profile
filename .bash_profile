@@ -47,6 +47,6 @@ export MANPAGER="less -X"
 export EDITOR=emacs
 
 # Include any environment-specific settings
-if [[ -r ~/.extras ]]; then
-    source ~/.extras
+if [[ -r ~/.profile ]]; then
+    source ~/.profile
 fi

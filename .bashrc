@@ -43,4 +43,3 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
