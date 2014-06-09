@@ -32,11 +32,13 @@ alias servedir="python -m SimpleHTTPServer 1234"
 
 # enable various auto-complete stuff
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+  . /etc/bash_completion
 fi
-# OS X
+
 if [ -d /usr/local/etc/bash_completion.d ]; then
-    . /usr/local/etc/bash_completion.d/*
+  for f in /usr/local/etc/bash_completion.d/*; do
+    source $f
+  done
 fi
 
 # make less more friendly for non-text input files
