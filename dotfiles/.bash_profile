@@ -46,6 +46,29 @@ export MANPAGER="less -X"
 
 export EDITOR=emacs
 
+set_prompt() {
+  local bold="\[$(tput bold)\]"
+  local reset="\[$(tput sgr0)\]"
+  local green="\[$(tput setaf 2)\]"
+  local working_directory="\w"
+
+  PS1="\n${bold}${working_directory}${reset}"
+
+  if [[ $(type -t __git_ps1) == "function" ]]; then
+    local git_branch_name='$(__git_ps1 " (%s)")'
+    PS1+="${green}${git_branch_name}${reset}"
+  fi
+
+  # Highlight input (command)
+  PS1+=" $ ${bold}"
+
+  # Hack to reset styles before displaying output, per
+  # http://chakra.sourceforge.net/wiki/index.php/Color_Bash_Prompt
+  trap 'echo -ne "$(tput sgr0)" >$(tty)' DEBUG
+}
+
+PROMPT_COMMAND='set_prompt'
+
 # Include any environment-specific settings
 if [[ -r ~/.profile ]]; then
     source ~/.profile
