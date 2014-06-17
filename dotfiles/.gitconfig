@@ -7,11 +7,14 @@
     b = branch
     ci = commit -v
     co = checkout
+    ff = merge --ff-only
     st = status
     graph = log --pretty=graphable --graph --date=short
     # XXX: should compare against branch point
     summary = log --oneline origin/master..
     preview = diff --cached
+[merge]
+    defaultToUpstream = true
 [pretty]
     graphable = %C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an %C(bold black)%cr
 [push]
