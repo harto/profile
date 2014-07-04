@@ -23,13 +23,6 @@ fi
 alias ll="ls -l"
 alias la="ls -lA"
 
-# Serve a directory over HTTP
-alias servedir="python -m SimpleHTTPServer 1234"
-
-# View HTTP traffic
-#alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-#alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-
 # enable various auto-complete stuff
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
