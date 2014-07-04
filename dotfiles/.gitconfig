@@ -1,8 +1,8 @@
 [user]
-	name = Stuart Campbell
-	email = stuart@harto.org
+    name = Stuart Campbell
+    email = stuart@harto.org
 [color]
-	ui = auto
+    ui = auto
 [alias]
     b = branch
     ci = commit -v
@@ -21,4 +21,4 @@
     # only push current branch
     default = upstream
 [core]
-	excludesfile = /Users/stuart/.gitignore-global
+    excludesfile = /Users/stuart/.gitignore-global
