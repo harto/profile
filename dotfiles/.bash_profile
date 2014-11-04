@@ -24,15 +24,28 @@ alias ll="ls -l"
 alias la="ls -lA"
 
 # enable various auto-complete stuff
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
-fi
 
-if [ -d /usr/local/etc/bash_completion.d ]; then
-  for f in /usr/local/etc/bash_completion.d/*; do
-    source $f
-  done
-fi
+enable_posix_autocomplete() {
+  if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+  fi
+}
+
+enable_osx_autocomplete() {
+  if which brew &>/dev/null; then
+    local brew_prefix=$(brew --prefix)
+    if [ -f $brew_prefix/etc/bash_completion ]; then
+      . $brew_prefix/etc/bash_completion
+    fi
+    for f in $brew_prefix/etc/bash_completion.d/*.sh \
+      $brew_prefix/etc/bash_completion.d/*.bash; do
+      . $f
+    done
+  fi
+}
+
+enable_posix_autocomplete
+enable_osx_autocomplete
 
 # make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
