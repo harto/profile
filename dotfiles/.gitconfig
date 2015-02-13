@@ -22,3 +22,5 @@
     default = upstream
 [core]
     excludesfile = /Users/stuart/.gitignore-global
+[remote "origin"]
+	prune = true
