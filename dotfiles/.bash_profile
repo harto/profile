@@ -58,9 +58,10 @@ set_prompt() {
   local bold="\[$(tput bold)\]"
   local reset="\[$(tput sgr0)\]"
   local green="\[$(tput setaf 2)\]"
+  local time="\D{%T}"
   local working_directory="\w"
 
-  PS1="\n${bold}${working_directory}${reset}"
+  PS1="${reset}\n[${time}] ${working_directory}"
 
   if [[ $(type -t __git_ps1) == "function" ]]; then
     local git_branch_name='$(__git_ps1 " (%s)")'
