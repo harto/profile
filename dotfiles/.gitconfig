@@ -24,3 +24,5 @@
     excludesfile = /Users/stuart/.gitignore-global
 [remote "origin"]
     prune = true
+[grep]
+    extendedRegexp = true
