@@ -23,4 +23,4 @@
 [core]
     excludesfile = /Users/stuart/.gitignore-global
 [remote "origin"]
-	prune = true
+    prune = true
