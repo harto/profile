@@ -58,10 +58,9 @@ set_prompt() {
   local bold="\[$(tput bold)\]"
   local reset="\[$(tput sgr0)\]"
   local green="\[$(tput setaf 2)\]"
-  local time="\D{%T}"
   local working_directory="\w"
 
-  PS1="${reset}\n[${time}] ${working_directory}"
+  PS1="${reset}\n${working_directory}"
 
   if [[ $(type -t __git_ps1) == "function" ]]; then
     local git_branch_name='$(__git_ps1 " (%s)")'
@@ -69,7 +68,7 @@ set_prompt() {
   fi
 
   # Highlight input (command)
-  PS1+=" $ ${bold}"
+  PS1+=" › ${bold}"
 
   # Hack to reset styles before displaying output, per
   # http://chakra.sourceforge.net/wiki/index.php/Color_Bash_Prompt
