@@ -13,6 +13,7 @@
     remote-head = !sh -c 'sed -n \"s@ref: refs/remotes/@@p\" .git/refs/remotes/$1/HEAD' -
     summary = !git log --oneline $(git remote-head origin)..
     preview = diff --cached
+    instamend = commit --all --amend --no-edit
 [merge]
     defaultToUpstream = true
 [pretty]
