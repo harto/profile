@@ -47,6 +47,18 @@ enable_osx_autocomplete() {
 enable_posix_autocomplete
 enable_osx_autocomplete
 
+# Autocomplete ssh aliases
+__complete_ssh_hosts() {
+  COMPREPLY=()
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  local ssh_hosts=$(grep '^Host ' ~/.ssh/config | \
+                    awk '{print $2}' | \
+                    grep -v '*')
+  COMPREPLY=($(compgen -W "${ssh_hosts}" -- $cur))
+  return 0
+}
+complete -F __complete_ssh_hosts ssh
+
 # make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 # Don't clear screen after quitting `man'
