@@ -14,6 +14,8 @@
     summary = !git log --oneline $(git remote-head origin)..
     preview = diff --cached
     instamend = commit --all --amend --no-edit
+    # maybe = !bash -c 'b=${1:-$(git symbolic-ref --short HEAD)} && git branch -m $b maybe/$b' -
+    # yolo = !git commit --all --amend --no-edit; git push --force
 [merge]
     defaultToUpstream = true
 [pretty]
