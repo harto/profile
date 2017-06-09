@@ -32,15 +32,9 @@ enable_posix_autocomplete() {
 }
 
 enable_osx_autocomplete() {
-  if which brew &>/dev/null; then
-    local brew_prefix=$(brew --prefix)
-    if [ -f $brew_prefix/etc/bash_completion ]; then
-      . $brew_prefix/etc/bash_completion
-    fi
-    for f in $brew_prefix/etc/bash_completion.d/*.sh \
-      $brew_prefix/etc/bash_completion.d/*.bash; do
-      . $f
-    done
+  if [ -f /usr/local/etc/bash_completion ]; then
+    # todo: figure out a way to speed this up
+    . /usr/local/etc/bash_completion
   fi
 }
 
@@ -70,17 +64,23 @@ set_prompt() {
   local bold="\[$(tput bold)\]"
   local reset="\[$(tput sgr0)\]"
   local green="\[$(tput setaf 2)\]"
+  #local current_date="\D{[%Y-%m-%d %H:%M:%S]}"
   local working_directory="\w"
 
-  PS1="${reset}\n${working_directory}"
+  PS1="${reset}"
+  PS1+="\n"
+  PS1+="${working_directory}"
 
   if [[ $(type -t __git_ps1) == "function" ]]; then
     local git_branch_name='$(__git_ps1 " (%s)")'
     PS1+="${green}${git_branch_name}${reset}"
   fi
 
+  PS1+=" "
+  #PS1+="\n"
+
   # Highlight input (command)
-  PS1+=" › ${bold}"
+  PS1+="› ${bold}"
 
   # Hack to reset styles before displaying output, per
   # http://chakra.sourceforge.net/wiki/index.php/Color_Bash_Prompt
@@ -91,5 +91,5 @@ PROMPT_COMMAND='set_prompt'
 
 # Include any environment-specific settings
 if [[ -r ~/.profile ]]; then
-    source ~/.profile
+  source ~/.profile
 fi
