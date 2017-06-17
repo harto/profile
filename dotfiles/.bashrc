@@ -18,11 +18,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-## Aliases
-
-alias ll="ls -l"
-alias la="ls -lA"
-
 # enable various auto-complete stuff
 
 enable_posix_autocomplete() {
@@ -57,8 +52,6 @@ complete -F __complete_ssh_hosts ssh
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 # Don't clear screen after quitting `man'
 export MANPAGER="less -X"
-
-export EDITOR=emacs
 
 set_prompt() {
   local bold="\[$(tput bold)\]"
