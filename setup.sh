@@ -2,6 +2,10 @@
 
 set -ex
 
+#
+# Homebrew packages
+#
+
 brew update
 
 FORMULAE="
@@ -23,6 +27,16 @@ CASK_FORMULAE="
 emacs
 "
 
-for f in $CASK_FORMULAE; do
-  brew cask install $f
+for cf in $CASK_FORMULAE; do
+  brew cask install $cf
+done
+
+#
+# Install configs
+#
+
+DOTFILES_DIR="$(cd $(dirname $0); pwd -P)/dotfiles"
+cd ~
+find $DOTFILES_DIR -type f | while read path; do
+  ln -fs $path
 done
