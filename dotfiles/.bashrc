@@ -54,7 +54,7 @@ complete -F __complete_ssh_hosts ssh
 export MANPAGER="less -X"
 
 set_prompt() {
-  local bold="\[$(tput bold)\]"
+  local bold= #"\[$(tput bold)\]"
   local reset="\[$(tput sgr0)\]"
   local green="\[$(tput setaf 2)\]"
   #local current_date="\D{[%Y-%m-%d %H:%M:%S]}"
@@ -77,7 +77,8 @@ set_prompt() {
 
   # Hack to reset styles before displaying output, per
   # http://chakra.sourceforge.net/wiki/index.php/Color_Bash_Prompt
-  trap 'echo -ne "$(tput sgr0)" >$(tty)' DEBUG
+  # FIXME: doesn't quite work; first line of output is also coloured
+  #trap 'echo -ne "$(tput sgr0)" >$(tty)' DEBUG
 }
 
 PROMPT_COMMAND='set_prompt'
