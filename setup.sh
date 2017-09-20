@@ -15,7 +15,7 @@ cd $HERE
 brew bundle
 
 #
-# Install configs
+# Install various scripts and dotfiles
 #
 
 symlink_all() {
@@ -27,3 +27,6 @@ symlink_all() {
 }
 
 symlink_all $HERE/dotfiles ~
+
+mkdir -p ~/bin
+symlink_all $HERE/bin ~/bin

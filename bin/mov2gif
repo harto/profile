@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v ffmpeg; then
+  brew install ffmpeg
+fi
+
+if ! command -v gifscile; then
+  brew install gifsicle
+fi
+
+IN=$1
+if (( $# > 1 )); then
+  OUT=$2
+else
+  OUT=$(basename $1).gif
+fi
+
+ffmpeg -i $IN -vf scale=800:-1 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=5 > $OUT
