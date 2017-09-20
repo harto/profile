@@ -2,34 +2,17 @@
 
 set -ex
 
+HERE=$(cd $(dirname $0); pwd -P)
+
 #
 # Homebrew packages
 #
 
 brew update
-
-FORMULAE="
-aws-keychain
-bash
-bash-completion
-chruby
-git
-hub
-ruby-install
-tmux
-"
-
-for f in $FORMULAE; do
-  brew install $f
-done
-
-CASK_FORMULAE="
-emacs
-"
-
-for cf in $CASK_FORMULAE; do
-  brew cask install $cf
-done
+brew upgrade
+brew tap Homebrew/bundle
+cd $HERE
+brew bundle
 
 #
 # Install configs
