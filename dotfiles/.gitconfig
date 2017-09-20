@@ -1,3 +1,5 @@
+[core]
+    excludesfile = /Users/stuart/.gitignore-global
 [user]
     name = Stuart Campbell
     email = stuart@harto.org
@@ -13,9 +15,9 @@
     remote-head = !sh -c 'sed -n \"s@ref: refs/remotes/@@p\" .git/refs/remotes/$1/HEAD' -
     summary = !git log --oneline $(git remote-head origin)..
     preview = diff --cached
-    instamend = commit --all --amend --no-edit
+    instamend = commit --amend --no-edit
     # maybe = !bash -c 'b=${1:-$(git symbolic-ref --short HEAD)} && git branch -m $b maybe/$b' -
-    # yolo = !git commit --all --amend --no-edit; git push --force
+    wip = !git add -A && git commit -nm wip
 [merge]
     defaultToUpstream = true
 [pretty]
@@ -23,8 +25,6 @@
 [push]
     # only push current branch
     default = upstream
-[core]
-    excludesfile = /Users/stuart/.gitignore-global
 [remote "origin"]
     prune = true
 [grep]
@@ -33,3 +33,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+[rerere]
+    enabled = true
