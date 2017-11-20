@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Similar to npx but doesn't download missing packages.
+# Adds every possible node_modules/.bin up the filesystem tree to PATH.
+# (Inspired by https://github.com/zkat/npx/issues/118)
+
+curdir="$PWD"
+npm_paths=
+
+while true; do
+  npm_paths+="${curdir%/}/node_modules/.bin:"
+  nextdir="$(dirname "$curdir")"
+  if [[ "$nextdir" == "$curdir" ]]; then break; fi
+  curdir="$nextdir"
+done
+
+PATH="${npm_paths}${PATH}" exec "$@"
