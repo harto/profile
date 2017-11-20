@@ -4,6 +4,9 @@ set -ex
 
 HERE=$(cd $(dirname $0); pwd -P)
 
+# TODO: this should probably do things like:
+# set default OS X keyboard preferences (repeat rate, disable capslock)
+
 #
 # Homebrew packages
 #
@@ -21,7 +24,7 @@ brew bundle
 symlink_all() {
   source=$1
   target=$2
-  find $source -type f ! -name '*~' | while read path; do
+  find $source -type f -o -type l ! -name '*~' | while read path; do
     ln -fs $path $target
   done
 }
