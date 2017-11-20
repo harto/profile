@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Find non-ASCII chars in file
+rg -n "[^\x00-\x7F]" "$1"
