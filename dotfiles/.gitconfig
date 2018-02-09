@@ -1,5 +1,5 @@
 [core]
-    excludesfile = /Users/stuart/.gitignore-global
+    excludesfile = ~/.gitignore-global
 [user]
     name = Stuart Campbell
     email = stuart@harto.org
