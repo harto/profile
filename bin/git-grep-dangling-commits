@@ -2,11 +2,10 @@
 
 # Search dangling commits using `git log` filters:
 #
-#   git-grep-dangling-commits -S'something in the diff'
-#   git-grep-dangling-commits --grep='something in the log message'
+#   git-grep-dangling-commits -S'something in the diff' --since='3 days ago'
+#   git-grep-dangling-commits --grep='something in the log message' -- path/to/modified/file
 
-filteropts="$@"
-
+set -x
 git fsck --lost-found \
   | awk '/commit/ { print $3 }' \
-  | xargs -n1 -I% git log %~1..% --oneline "$filteropts"
+  | xargs -n1 -I% git log %~1..% --oneline "$@"
