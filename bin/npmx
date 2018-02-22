@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Similar to npx but doesn't download missing packages.
-# Adds every possible node_modules/.bin up the filesystem tree to PATH.
+# Similar to npx, with the following differences:
+#  - never downloads missing packages
+#  - looks in every possible node_modules/.bin up the filesystem tree to /.
 # (Inspired by https://github.com/zkat/npx/issues/118)
 
 curdir="$PWD"
