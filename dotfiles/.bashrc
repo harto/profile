@@ -1,6 +1,4 @@
-# PS4='+ $(gdate "+%s.%N")\011 '
-# exec 3>&2 2>/tmp/bashstart.$$.log
-# set -x
+# Shell configuration
 
 
 ### Prompt
@@ -47,13 +45,21 @@ if [[ -r ~/.profile ]]; then
 fi
 
 
+### Aliases
+
+
+alias e=$EDITOR
+alias e.="$EDITOR ."
+alias g=git
+
+
 ### Deferred/slow things
 
-# Loading bash completion is quite slow (~200ms), so defer doing so until after
-# the prompt is shown.
+# Loading bash completion on OSX is quite slow (~200ms), so defer doing so until
+# after the prompt is shown.
 __deferred_configuration() {
   source /usr/local/etc/bash_completion
-  # Can't use git-prompt until bash completion is loaded.
+  # Can't set git prompt until bash completion is loaded.
   __configure_git_prompt
 }
 

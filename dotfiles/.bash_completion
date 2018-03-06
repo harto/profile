@@ -10,3 +10,8 @@ __complete_ssh_hosts() {
   return 0
 }
 complete -F __complete_ssh_hosts ssh
+
+# Autocomplete for git shortcut
+if [[ $(type -t __git_main) == function ]]; then
+  __git_complete g __git_main
+fi
