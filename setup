@@ -2,7 +2,7 @@
 
 set -ex
 
-HERE=$(cd $(dirname $0); pwd -P)
+HERE=$(cd "$(dirname "$0")"; pwd -P)
 
 # TODO: this should probably do things like:
 # set default OS X keyboard preferences (repeat rate, disable capslock)
@@ -14,7 +14,7 @@ HERE=$(cd $(dirname $0); pwd -P)
 brew update
 brew upgrade
 brew tap Homebrew/bundle
-cd $HERE
+cd "$HERE"
 brew bundle
 
 #
@@ -22,14 +22,14 @@ brew bundle
 #
 
 symlink_all() {
-  source=$1
-  target=$2
-  find $source -type f -o -type l ! -name '*~' | while read path; do
-    ln -fs $path $target
+  local source=$1
+  local target=$2
+  find "$source" -type f -o -type l ! -name '*~' | while read -r path; do
+    ln -fs "$path" "$target"
   done
 }
 
-symlink_all $HERE/dotfiles ~
+symlink_all "$HERE"/dotfiles ~
 
 mkdir -p ~/bin
-symlink_all $HERE/bin ~/bin
+symlink_all "$HERE"/bin ~/bin

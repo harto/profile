@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Similar to npx, with the following differences:
 #  - never downloads missing packages
-#  - looks in every possible node_modules/.bin up the filesystem tree to /.
+#  - looks in every possible node_modules/.bin up the filesystem tree to /
 # (Inspired by https://github.com/zkat/npx/issues/118)
 
 curdir="$PWD"
