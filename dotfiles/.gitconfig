@@ -10,15 +10,16 @@
     ci = commit -v
     co = checkout
     ff = merge --ff-only
-    st = status
     graph = log --pretty=graphable --graph --date=short
-    remote-head = !sh -c 'sed -n \"s@ref: refs/remotes/@@p\" .git/refs/remotes/$1/HEAD' -
-    summary = !git log --oneline $(git remote-head origin)..
-    preview = diff --cached
     instamend = commit --amend --no-edit
-    # maybe = !bash -c 'b=${1:-$(git symbolic-ref --short HEAD)} && git branch -m $b maybe/$b' -
-    wip = !git add -A && git commit -nm wip
+    preview = diff --cached
+    remote-head = !bash -c 'sed -n \"s@ref: refs/remotes/@@p\" .git/refs/remotes/$1/HEAD' -
+    snooze = !git-snooze
+    st = status
+    summary = !git log --oneline $(git remote-head origin)..
+    unsnooze = !git-unsnooze
     unwip = reset HEAD^
+    wip = !git add -A && git commit -nm wip
 [merge]
     defaultToUpstream = true
 [pretty]

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+snoozed_branch_name=${1:-$(git symbolic-ref --short HEAD)}
+unsnoozed_branch_name=$(echo "$snoozed_branch_name" | sed -E 's/^zzz-[0-9]{8}-//')
+
+git branch --move "$snoozed_branch_name" "$unsnoozed_branch_name"
+git checkout "$unsnoozed_branch_name"
