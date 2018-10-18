@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# List "active" git branches, i.e. those not prefixed with either `x-`
+# (indicating "experimental") or `zzz-` (indicating "snoozed"), sorted by latest
+# commit date.
+
+set -euo pipefail
+git branch --sort=-committerdate \
+  | grep -vE '^  (x-|zzz-)'

@@ -6,6 +6,7 @@
 [color]
     ui = auto
 [alias]
+    ab = !git-active-branches
     b = branch
     ci = commit -v
     co = checkout
