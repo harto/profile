@@ -25,7 +25,7 @@ brew cleanup
 symlink_all() {
   local source=$1
   local target=$2
-  find "$source" -type f -o -type l ! -name '*~' | while read -r path; do
+  find "$source" \( -type f -o -type l \) ! -name '*~' | while read -r path; do
     ln -fs "$path" "$target"
   done
 }
