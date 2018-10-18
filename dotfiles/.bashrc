@@ -12,6 +12,8 @@ __configure_git_prompt() {
     export GIT_PS1_SHOWDIRTYSTATE=1
     export GIT_PS1_SHOWUNTRACKEDFILES=1
     PROMPT_COMMAND='__git_ps1 "\n\w" " › "'
+  else
+    PS1="\n\w › "
   fi
 }
 
@@ -55,12 +57,18 @@ alias g=git
 
 ### Deferred/slow things
 
-# Loading bash completion on OSX is quite slow (~200ms), so defer doing so until
+# Loading bash completion on OSX is quite slow (~200ms), so defer it until
 # after the prompt is shown.
 __deferred_configuration() {
-  source /usr/local/etc/bash_completion
-  # Can't set git prompt until bash completion is loaded.
-  __configure_git_prompt
+  if [[ -f /usr/local/etc/bash_completion ]]; then
+    # if the output of `set` contains non-ASCII chars we get a `sed` error from
+    # git-completion.bash. Therefore we temporarily remove any fancy prompt
+    # characters while that file is sourced.
+    PS1=
+    source /usr/local/etc/bash_completion
+    # Can't set git prompt until bash completion is loaded.
+    __configure_git_prompt
+  fi
 }
 
 trap '__deferred_configuration; trap USR1' USR1
