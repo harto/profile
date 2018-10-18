@@ -16,6 +16,7 @@ brew upgrade
 brew tap Homebrew/bundle
 cd "$HERE"
 brew bundle
+brew cleanup
 
 #
 # Install various scripts and dotfiles
