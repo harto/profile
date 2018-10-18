@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# "Word diff", using git diff
+# per https://stackoverflow.com/questions/1721738/using-diff-or-anything-else-to-get-character-level-diff-between-text-files#comment63451922_31356602
+
+exec git diff --no-index --word-diff=color "$1" "$2"
