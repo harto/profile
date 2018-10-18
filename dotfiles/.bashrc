@@ -39,6 +39,9 @@ export MANPAGER="less -X"
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Colourised `ls`, etc.
+export CLICOLOR=1
+
 
 ### Private/local settings
 
@@ -53,6 +56,8 @@ fi
 alias e=$EDITOR
 alias e.="$EDITOR ."
 alias g=git
+alias gst="git status"
+alias gco="git checkout"
 
 
 ### Deferred/slow things
