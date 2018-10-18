@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TIMES=10
+while getopts ":n:" opt; do
+  case $opt in
+    n) TIMES="$OPTARG";;
+    *) ;;
+  esac
+done
+shift $(( OPTIND - 1 ))
+
+for _ in $(seq 0 "$TIMES"); do time -p eval "$@"; done 2>&1 \
+  | awk '
+    /^real / {
+      seconds = $2;
+      measurements[length(measurements)] = seconds;
+    }
+
+    END {
+      total_seconds = 0;
+      for (i in measurements) {
+        total_seconds += measurements[i];
+      }
+      print("avg wall time:", total_seconds / length(measurements), "seconds");
+    }
+  '
