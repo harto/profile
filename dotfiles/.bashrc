@@ -1,6 +1,25 @@
 # Shell configuration
 
 
+### Deferred initializers
+
+# Some initialization code noticeably slows down opening a new terminal tab.
+# We can momentarily defer these slow initializers to give the impression of
+# faster load time.
+
+__deferred_initializers=()
+
+add_deferred_initializer() {
+  __deferred_initializers+=("$1")
+}
+
+__run_deferred_initializers() {
+  for initializer in ${__deferred_initializers[*]}; do
+    $initializer
+  done
+}
+
+
 ### Prompt
 
 PS1="\n\w › "
@@ -16,6 +35,22 @@ __configure_git_prompt() {
     PS1="\n\w › "
   fi
 }
+
+__configure_bash_completion() {
+  if [[ -f /usr/local/etc/bash_completion ]]; then
+    # if the output of `set` contains non-ASCII chars we get a `sed` error from
+    # git-completion.bash. Therefore we temporarily remove any fancy prompt
+    # characters while that file is sourced.
+    PS1=
+    source /usr/local/etc/bash_completion
+    # Can't set git prompt until bash completion is loaded.
+    __configure_git_prompt
+  fi
+}
+
+# Loading bash completion on OSX is quite slow (~200ms), so defer it until
+# after the prompt is shown.
+add_deferred_initializer __configure_bash_completion
 
 
 ### History
@@ -60,21 +95,17 @@ alias gst="git status"
 alias gco="git checkout"
 
 
-### Deferred/slow things
+### Run deferred initialization
 
-# Loading bash completion on OSX is quite slow (~200ms), so defer it until
-# after the prompt is shown.
-__deferred_configuration() {
-  if [[ -f /usr/local/etc/bash_completion ]]; then
-    # if the output of `set` contains non-ASCII chars we get a `sed` error from
-    # git-completion.bash. Therefore we temporarily remove any fancy prompt
-    # characters while that file is sourced.
-    PS1=
-    source /usr/local/etc/bash_completion
-    # Can't set git prompt until bash completion is loaded.
-    __configure_git_prompt
-  fi
-}
+# If we're using bash to run some command in a fully-initialized environment
+# (e.g. "bash -lc ruby prog.rb") we need to run all initializers immediately.
+# Otherwise, let the prompt show before running them in the background.
 
-trap '__deferred_configuration; trap USR1' USR1
-{ sleep 0.1; builtin kill -USR1 $$; } & disown
+# TODO: figure out if this is a good way of distinguishing between these use
+# cases
+if [[ $0 == '-bash' ]]; then
+  trap '__run_deferred_initializers; trap USR1' USR1
+  { sleep 0.01; builtin kill -USR1 $$; } & disown
+else
+  __run_deferred_initializers
+fi
