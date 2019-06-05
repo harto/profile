@@ -91,8 +91,15 @@ fi
 alias e=$EDITOR
 alias e.="$EDITOR ."
 alias g=git
-alias gst="git status"
-alias gco="git checkout"
+# TODO: figure out how to get autocompletion for these subcommand aliases
+alias gb="g b"
+alias gco="g co"
+alias gci="g ci"
+alias gd="g d"
+alias gdiff="gd"
+alias gp="g p"
+alias gpull="gp"
+alias gst="g st"
 
 
 ### Run deferred initialization

@@ -10,6 +10,7 @@
     b = branch
     ci = commit -v
     co = checkout
+    d = diff
     ff = merge --ff-only
     graph = log --pretty=graphable --graph --date=short
     instamend = commit --amend --no-edit
