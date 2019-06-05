@@ -87,9 +87,9 @@ fi
 
 ### Aliases
 
-
-alias e=$EDITOR
-alias e.="$EDITOR ."
+alias be="bundle exec"
+alias e.='$EDITOR .'
+alias e='$EDITOR'
 alias g=git
 # TODO: figure out how to get autocompletion for these subcommand aliases
 alias gb="g b"
