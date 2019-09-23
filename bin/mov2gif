@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if ! command -v ffmpeg; then
-  brew install ffmpeg
-fi
+die() {
+  echo "$@" >&2
+  exit 1
+}
 
-if ! command -v gifscile; then
-  brew install gifsicle
-fi
+require() {
+  command -v "$1" &>/dev/null || die "requires $1"
+}
+
+require ffmpeg
+require gifsicle
+(( $# > 0 )) || die "usage: mov2gif <in> [<out>]"
 
 IN=$1
 if (( $# > 1 )); then
   OUT=$2
 else
-  OUT=$(basename $1).gif
+  OUT=$(basename "$1").gif
 fi
 
-ffmpeg -i $IN -vf scale=800:-1 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=5 > $OUT
+ffmpeg -i "$IN" -vf scale=800:-1 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=5 > "$OUT"

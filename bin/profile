@@ -10,6 +10,8 @@ while getopts ":n:" opt; do
 done
 shift $(( OPTIND - 1 ))
 
+echo "running \`$*\` $TIMES times"
+
 for _ in $(seq 0 "$TIMES"); do time -p eval "$@"; done 2>&1 \
   | awk '
     /^real / {
