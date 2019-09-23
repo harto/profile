@@ -45,6 +45,14 @@ __configure_bash_completion() {
     source /usr/local/etc/bash_completion
     # Can't set git prompt until bash completion is loaded.
     __configure_git_prompt
+
+    __git_complete gb _git_branch
+    __git_complete gco _git_checkout
+    __git_complete gci _git_commit
+    __git_complete gd _git_diff
+    __git_complete gp _git_pull
+    __git_complete gpull _git_pull
+    __git_complete gst _git_status
   fi
 }
 
@@ -91,7 +99,6 @@ alias be="bundle exec"
 alias e.='$EDITOR .'
 alias e='$EDITOR'
 alias g=git
-# TODO: figure out how to get autocompletion for these subcommand aliases
 alias gb="g b"
 alias gco="g co"
 alias gci="g ci"
