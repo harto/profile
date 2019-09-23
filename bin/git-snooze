@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-unsnoozed_branch_name=${1:-$(git symbolic-ref --short HEAD)}
-snoozed_branch_name=zzz-$(date +%Y%m%d)-$unsnoozed_branch_name
-
-git branch --move "$unsnoozed_branch_name" "$snoozed_branch_name"
