@@ -107,7 +107,7 @@ alias gdiff="gd"
 alias gp="g p"
 alias gpull="gp"
 alias gst="g st"
-
+alias less="less -X"
 
 ### Run deferred initialization
 
