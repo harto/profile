@@ -22,15 +22,5 @@ brew cleanup
 # Install various scripts and dotfiles
 #
 
-symlink_all() {
-  local source=$1
-  local target=$2
-  find "$source" \( -type f -o -type l \) ! -name '*~' | while read -r path; do
-    ln -fs "$path" "$target"
-  done
-}
-
-symlink_all "$HERE"/dotfiles ~
-
-mkdir -p ~/bin
-symlink_all "$HERE"/bin ~/bin
+"$HERE"/install-dotfiles
+"$HERE"/install-scripts

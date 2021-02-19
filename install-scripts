@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mkdir -p ~/bin
+find "$(cd "$(dirname "$0")"; pwd -P)/bin" \( -type f -o -type l \) -print0 | \
+  xargs -0 -t -n1 -I% ln -s % ~/bin
