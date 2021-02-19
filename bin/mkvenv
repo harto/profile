@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+venv=${1:-venv}
+set -x
+mkdir -p "$venv"
+xattr -w com.dropbox.ignored 1 "$venv"
+python -m venv "$venv"
+"$venv"/bin/pip install -q -U pip

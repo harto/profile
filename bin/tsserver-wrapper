@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Invokes tsserver with a hard-coded --npmLocation option.
+#
+# We need a wrapper to do this because there's no way to pass the --npmLocation
+# option when tsserver is invoked via typescript-language-server
+# (https://github.com/theia-ide/typescript-language-server/issues/122).
+#
+# The reason we need to pass --npmLocation is because by default, tsserver looks
+# for an npm binary in the same location as the node binary
+# (https://github.com/microsoft/TypeScript/issues/23924#issuecomment-770261568).
+#
+# The reason those binaries aren't in the same directory is because under
+# Homebrew, there are node and npm symlinks in in /usr/local/bin, but the actual
+# binaries reside in separate directories.
+
+exec tsserver --npmLocation "$(which npm)" "$@"

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# https://stackoverflow.com/a/46262090
+sed -E "s/[[:cntrl:]]\[[0-9]{1,3}m//g" "$@"
