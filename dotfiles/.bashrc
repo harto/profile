@@ -22,7 +22,7 @@ __run_deferred_initializers() {
 
 ### Prompt
 
-PS1="\n\w › "
+PS1="\n\w\n› "
 
 __configure_git_prompt() {
   if [[ $(type -t __git_ps1) == "function" ]]; then
@@ -30,9 +30,9 @@ __configure_git_prompt() {
     export GIT_PS1_SHOWCOLORHINTS=1
     export GIT_PS1_SHOWDIRTYSTATE=1
     export GIT_PS1_SHOWUNTRACKEDFILES=1
-    PROMPT_COMMAND='__git_ps1 "\n\w" " › "'
+    PROMPT_COMMAND='__git_ps1 "\n\w" "\n› "'
   else
-    PS1="\n\w › "
+    PS1="\n\w\n› "
   fi
 }
 
@@ -98,16 +98,22 @@ fi
 alias be="bundle exec"
 alias e.='$EDITOR .'
 alias e='$EDITOR'
+alias less="less -X"
+
 alias g=git
 alias gb="g b"
-alias gco="g co"
+alias gbl="g bl"
 alias gci="g ci"
+alias gco="g co"
+alias gcob="gco -b"
+alias gcom="gco master"
 alias gd="g d"
 alias gdiff="gd"
 alias gp="g p"
 alias gpull="gp"
+alias grm="g rebase master"
 alias gst="g st"
-alias less="less -X"
+alias gwip="g wip"
 
 ### Run deferred initialization
 
