@@ -7,6 +7,7 @@
     ui = auto
 [alias]
     b = branch
+    bl = !git branch --sort=-committerdate | grep -wv master
     ci = commit -v
     co = checkout
     d = diff
@@ -15,19 +16,18 @@
     instamend = commit --amend --no-edit
     preview = diff --cached
     remote-head = !bash -c 'sed -n \"s@ref: refs/remotes/@@p\" .git/refs/remotes/$1/HEAD' -
-    snooze = !git-snooze
     st = status
     summary = !git log --oneline $(git remote-head origin)..
-    unsnooze = !git-unsnooze
     unwip = reset HEAD^
-    wip = !git add -A && git commit -nm wip
+    wip = commit -nm wip
 [merge]
     defaultToUpstream = true
+    # include original context when resolving merge conflicts
+    conflictstyle = diff3
 [pretty]
     graphable = %C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an %C(bold black)%cr
 [push]
-    # only push current branch
-    default = upstream
+    default = simple
 [remote "origin"]
     prune = true
 [grep]
@@ -36,5 +36,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [rerere]
     enabled = true
+[github]
+	user = harto
