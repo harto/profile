@@ -1,5 +1,9 @@
 # Shell configuration
 
+export PATH="$HOME/bin:$PATH"
+export EDITOR=emacsclient
+export ALTERNATE_EDITOR='emacs -nw'
+
 
 ### Deferred initializers
 
@@ -78,12 +82,16 @@ HISTFILESIZE=$HISTSIZE
 # Don't clear screen after quitting `man'
 export MANPAGER="less -X"
 
+# don't accidentally put DSNs in history (may include credentials)
+export HISTIGNORE='postgres://'
+
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Colourised `ls`, etc.
-export CLICOLOR=1
+# For clojars deployments
+# (TODO: remember what this does and document it)
+export GPG_TTY=$(tty)
 
 
 ### Private/local settings
