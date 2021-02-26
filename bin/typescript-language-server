@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Invokes a forked version of typescript-language-server
+# (https://github.com/harto/typescript-language-server/tree/remove-hardcoded-timeouts)
+#
+# The fork has been patched to remove timeouts, because we seem to hit those
+# when working in large codebases, and they crash the server.
+#
+# This whole situation can be removed:
+#  - if/when timeouts are removed upstream
+#  - if/when our codebase stops causing timeouts
+#
+# See:
+#  - https://github.com/theia-ide/typescript-language-server/pull/92
+
+node ~/src/typescript-language-server/server/lib/cli.js "$@"
