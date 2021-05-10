@@ -11,14 +11,14 @@ export ALTERNATE_EDITOR='emacs -nw'
 # We can momentarily defer these slow initializers to give the impression of
 # faster load time.
 
-__deferred_initializers=()
+__initializers=()
 
-add_deferred_initializer() {
-  __deferred_initializers+=("$1")
+add_initializer() {
+  __initializers+=("$1")
 }
 
-__run_deferred_initializers() {
-  for initializer in ${__deferred_initializers[*]}; do
+__run_initializers() {
+  for initializer in ${__initializers[*]}; do
     $initializer
   done
 }
@@ -62,13 +62,15 @@ __configure_bash_completion() {
 
 # Loading bash completion on OSX is quite slow (~200ms), so defer it until
 # after the prompt is shown.
-add_deferred_initializer __configure_bash_completion
+add_initializer __configure_bash_completion
 
 
 ### History
 
 # Don't put duplicate lines or lines starting with space in the history
 HISTCONTROL=ignoreboth
+# don't accidentally put DSNs in history (may include credentials)
+export HISTIGNORE='postgres://'
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
@@ -82,23 +84,12 @@ HISTFILESIZE=$HISTSIZE
 # Don't clear screen after quitting `man'
 export MANPAGER="less -X"
 
-# don't accidentally put DSNs in history (may include credentials)
-export HISTIGNORE='postgres://'
-
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# For clojars deployments
-# (TODO: remember what this does and document it)
+# For clojars deployments (TODO: remember what this does and document it)
 export GPG_TTY=$(tty)
-
-
-### Private/local settings
-
-if [[ -r ~/.profile ]]; then
-  source ~/.profile
-fi
 
 
 ### Aliases
@@ -123,6 +114,12 @@ alias grm="g rebase master"
 alias gst="g st"
 alias gwip="g wip"
 
+
+### Local settings
+[[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
+[[ -r ~/remix/remix.bash ]] && source ~/remix/remix.bash
+
+
 ### Run deferred initialization
 
 # If we're using bash to run some command in a fully-initialized environment
@@ -130,10 +127,10 @@ alias gwip="g wip"
 # Otherwise, let the prompt show before running them in the background.
 
 # TODO: figure out if this is a good way of distinguishing between these use
-# cases
+# cases :/
 if [[ $0 == '-bash' ]]; then
-  trap '__run_deferred_initializers; trap USR1' USR1
+  trap '__run_initializers; trap USR1' USR1
   { sleep 0.01; builtin kill -USR1 $$; } & disown
 else
-  __run_deferred_initializers
+  __run_initializers
 fi
