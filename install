@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -ex
+
+# TODO:
+# - set OS settings
+#   - keyboard repeat rate
+#   - remap caps lock
+
+"$HERE"/install-packages
+"$HERE"/symlink-dotfiles
+"$HERE"/symlink-scripts

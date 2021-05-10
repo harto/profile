@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Note: requires Homebrew (https://brew.sh)
+
+packages=(
+  aws-vault
+  bash
+  bash-completion
+  chruby
+  codemod
+  git
+  jq
+  ripgrep
+  ruby-install
+  dropbox
+  emacs
+  firefox
+)
+
+for p in "${packages[@]}"; do
+  echo brew install "$p"
+done
+
