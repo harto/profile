@@ -14,11 +14,11 @@ packages=(
   ripgrep
   ruby-install
   dropbox
-  emacs
   firefox
 )
 
 for p in "${packages[@]}"; do
-  echo brew install "$p"
+  brew install "$p"
 done
 
+brew install --cask emacs

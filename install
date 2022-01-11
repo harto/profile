@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -ex
+set -exuo pipefail
+
+HERE="$(cd "$(dirname "$0")"; pwd -P)"
 
 # TODO:
 # - set OS settings

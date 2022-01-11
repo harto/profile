@@ -3,5 +3,5 @@ set -euo pipefail
 
 mkdir -p ~/bin
 
-find "$(cd "$(dirname "$0")"/../bin; pwd -P)" \( -type f -o -type l \) -print0 | \
+find "$(cd "$(dirname "$0")"/bin; pwd -P)" \( -type f -o -type l \) -print0 | \
   xargs -0 -t -n1 -I% ln -fs % ~/bin
