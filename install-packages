@@ -10,10 +10,11 @@ packages=(
   chruby
   codemod
   git
+  hub
   jq
   ripgrep
   ruby-install
-  dropbox
+  # dropbox
   firefox
 )
 
