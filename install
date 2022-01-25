@@ -9,6 +9,6 @@ HERE="$(cd "$(dirname "$0")"; pwd -P)"
 #   - keyboard repeat rate
 #   - remap caps lock
 
-"$HERE"/install-packages
+( cd "$HERE" && brew bundle )
 "$HERE"/symlink-dotfiles
 "$HERE"/symlink-scripts
