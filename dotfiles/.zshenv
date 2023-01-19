@@ -7,6 +7,6 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-if [[ -r ~/remix/zshenv ]]; then
-  source ~/remix/zshenv
+if [[ -r ~/src/remix-utils/zshenv ]]; then
+  source ~/src/remix-utils/zshenv
 fi
