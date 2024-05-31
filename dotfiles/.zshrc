@@ -1,8 +1,8 @@
 source ${HOMEBREW_PREFIX}/share/chruby/chruby.sh
 source ${HOMEBREW_PREFIX}/share/chruby/auto.sh
 
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+eval "$(${HOMEBREW_PREFIX}/bin/pyenv init --path)"
+eval "$(${HOMEBREW_PREFIX}/bin/pyenv init -)"
 
 # TODO: I think this belongs in .zshenv so that it works with non-login(?) /
 # non-interactive(?) shells. But if I put it in .zshenv, something ends up
