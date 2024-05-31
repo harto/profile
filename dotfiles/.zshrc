@@ -10,7 +10,6 @@ eval "$(${HOMEBREW_PREFIX}/bin/pyenv init -)"
 # gets run before the Homebrew-installed (openjdk) one.
 path=(
   $HOME/bin
-  $REMIX_HOME/bin
   ${HOMEBREW_PREFIX}/opt/openjdk/bin
   ${HOMEBREW_PREFIX}/bin
   $path
