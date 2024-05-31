@@ -1,3 +1,5 @@
+# TODO: work-related stuff in here should be moved
+
 source ${HOMEBREW_PREFIX}/share/chruby/chruby.sh
 source ${HOMEBREW_PREFIX}/share/chruby/auto.sh
 
@@ -27,3 +29,10 @@ PROMPT='%~ %# '
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
   source ~/.emacs.d/etc/vterm.zsh
 fi
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+eval "$(direnv hook zsh)"
