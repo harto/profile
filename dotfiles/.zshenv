@@ -1,5 +1,3 @@
-# Start fresh
-unset PATH
 # Don't autoload global init files (/etc/zprofile, /etc/zshrc, etc.)
 unsetopt GLOBAL_RCS
 
@@ -14,6 +12,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 path=(
   $HOME/bin
   $HOME/.local/bin
+  # NOTE: When launching vterm from Emacs, PATH already includes everything
+  # defined here. We filter out duplicates at the end of this file.
   $path
   /usr/local/bin
   /usr/bin
@@ -28,3 +28,5 @@ export EDITOR=$HOME/.emacs.d/bin/emacsclient-wrapper
 if [[ -r ~/src/remix-setup/dotfiles/.zshenv ]]; then
   source ~/src/remix-setup/dotfiles/.zshenv
 fi
+
+typeset -U path PATH
